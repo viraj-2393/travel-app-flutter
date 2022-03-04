@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import './homeWidgets/list_items.dart';
 
 class Home extends StatelessWidget{
   static const routeName = "/home";
@@ -8,7 +10,8 @@ class Home extends StatelessWidget{
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: Icon(Icons.menu_outlined,color: Colors.grey,),
+        iconTheme: IconThemeData(color: Colors.grey),
+        //leading: Icon(Icons.menu_outlined,color: Colors.grey,),
         actions: [
           Container(
             margin: EdgeInsets.only(right: 10),
@@ -20,6 +23,7 @@ class Home extends StatelessWidget{
 
         ],
       ),
+      drawer: Drawer(),
       body: Container(
         padding: EdgeInsets.all(20),
         child: Column(
@@ -76,6 +80,19 @@ class Home extends StatelessWidget{
                     style: TextStyle(color: Colors.grey),
                   ),
 
+                ],
+              ),
+            ),
+            Container(
+              height: 200,
+              margin: EdgeInsets.only(top:20),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                   ListItems('Nusa Penida', 'Bali, Indonesia', 'assets/images/travel-spot-1.jpg'),
+                  ListItems('Raja Ampat', 'Lombok, Indonesia', 'assets/images/travel-spot-2.jpg'),
+                  ListItems('Golden Beach', 'Portugal', 'assets/images/travel-spot-3.jpg'),
+                  ListItems('Salzburg Hills', 'Austria', 'assets/images/travel-spot-4.jpg')
                 ],
               ),
             )
