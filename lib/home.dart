@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 import './homeWidgets/list_items.dart';
-
+import './providers/tour.dart';
 class Home extends StatelessWidget{
   static const routeName = "/home";
   @override
   Widget build(BuildContext context) {
+    final tourData = Provider.of<Tour>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -90,14 +92,16 @@ class Home extends StatelessWidget{
                 Container(
                   height: 200,
                   margin: EdgeInsets.only(top:20),
-                  child: ListView(
+                  child: ListView.builder(
+                    itemCount: tourData.tourLength,
+                    itemBuilder: (ctx,index)=>ListItems(index),
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      ListItems('Nusa Penida', 'Bali, Indonesia', 'assets/images/travel-spot-1.jpg'),
-                      ListItems('Raja Ampat', 'Lombok, Indonesia', 'assets/images/travel-spot-2.jpg'),
-                      ListItems('Golden Beach', 'Portugal', 'assets/images/travel-spot-3.jpg'),
-                      ListItems('Salzburg Hills', 'Austria', 'assets/images/travel-spot-4.jpg')
-                    ],
+                    // children: [
+                    //   ListItems('Nusa Penida', 'Bali, Indonesia', 'assets/images/travel-spot-1.jpg'),
+                    //   ListItems('Raja Ampat', 'Lombok, Indonesia', 'assets/images/travel-spot-2.jpg'),
+                    //   ListItems('Golden Beach', 'Portugal', 'assets/images/travel-spot-3.jpg'),
+                    //   ListItems('Salzburg Hills', 'Austria', 'assets/images/travel-spot-4.jpg')
+                    // ],
                   ),
                 )
 

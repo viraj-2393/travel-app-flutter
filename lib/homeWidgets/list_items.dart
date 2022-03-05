@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
-
+import '../tour_details.dart';
+import '../providers/tour.dart';
+import 'package:provider/provider.dart';
 class ListItems extends StatelessWidget{
-  final String name;
-  final String location;
-  final String imageUrl;
-  ListItems(this.name,this.location,this.imageUrl);
+  final int index;
+  ListItems(this.index);
   @override
   Widget build(BuildContext context) {
+    final tourData = Provider.of<Tour>(context);
     return Container(
       margin: EdgeInsets.only(right: 10),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Container(
             width: 150,
-            child: GridTile(
-              child: Image.asset(imageUrl,fit: BoxFit.cover,),
-              footer:GridTileBar(
-                backgroundColor: Colors.black26,
-                subtitle: FittedBox(child:Text(name)),
-                trailing: IconButton(
-                  icon: Icon(Icons.favorite,color: Colors.white,size: 18,),
-                  onPressed: (){},
+            child: GestureDetector(
+              onTap:(){
+                Navigator.of(context).pushNamed(TourDetails.routeName,arguments:{
+                  'index':index
+                });
+              },
+              child: GridTile(
+                child: Image.asset(tourData.tourData(index).imageUrl,fit: BoxFit.cover,),
+                footer:GridTileBar(
+                  backgroundColor: Colors.black26,
+                  subtitle: FittedBox(child:Text(tourData.tourData(index).title)),
+                  trailing: IconButton(
+                    icon: Icon(Icons.favorite,color: Colors.white,size: 18,),
+                    onPressed: (){},
+                  ),
                 ),
               ),
             ),
